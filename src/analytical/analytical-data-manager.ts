@@ -1,4 +1,12 @@
+import {GroupingOrder} from "./grouping-order";
+import {SortingOrder} from "./sorting-order";
+
 export class AnalyticalDataManager {
-     constructor() {
-     }
- }
+    groupingOrder: GroupingOrder;
+    sortingOrder: SortingOrder;
+
+    constructor() {
+        this.groupingOrder = new GroupingOrder();
+        this.sortingOrder = new SortingOrder();
+    }
+}

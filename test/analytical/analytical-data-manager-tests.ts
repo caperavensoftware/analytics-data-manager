@@ -11,5 +11,7 @@ describe('AnalyticalDataManager Tests', function() {
     
     it('constructor', function() {
         expect(analyticalDataManager).to.not.be.null;
+        expect(analyticalDataManager.groupingOrder).to.not.be.null;
+        expect(analyticalDataManager.sortingOrder).to.not.be.null;
     });
-})
+});
