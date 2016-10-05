@@ -2,18 +2,18 @@
     [grouping o]=> [grouping o]=> [grouping]
  */
 
-interface IGrouping {
+interface IOrderGroupItem {
     field: string;
     display: string;
-    parent?: IGrouping;
+    parent?: IOrderGroupItem;
 }
 
-interface IGroupings {
-    groupings: Array<IGrouping>;
+interface IOrderedGroup {
+    groupings: Array<IOrderGroupItem>;
 
-    add(item: IGrouping);
-    insert(item: IGrouping, index: number);
-    remove(item: IGrouping);
+    add(item: IOrderGroupItem);
+    insert(item: IOrderGroupItem, index: number);
+    remove(item: IOrderGroupItem);
     removeAt(index: number);
     move(fromIndex: number, toIndex: number);
 }

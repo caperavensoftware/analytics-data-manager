@@ -1,13 +1,13 @@
 import {expect, assert} from 'chai';
 import * as sinon from 'sinon';
 import 'aurelia-polyfills';
-import {Groupings, Grouping} from './../../src/analytical/groupings';
+import {OrderGroup, OrderGroupItem} from '../../src/analytical/ordered-groups';
 
-describe('Groupings Tests', function() {
+describe('OrderGroup Tests', function() {
     var groupings;
 
     beforeEach(function() {
-        groupings = new Groupings ();
+        groupings = new OrderGroup ();
     });
     
     it('constructor', function() {
@@ -17,7 +17,7 @@ describe('Groupings Tests', function() {
 
     it('add', function() {
         // Arrange
-        const grouping = new Grouping("field1", "Field 1");
+        const grouping = new OrderGroupItem("field1", "Field 1");
 
         // Act
         groupings.add(grouping);
@@ -28,9 +28,9 @@ describe('Groupings Tests', function() {
 
     it('insert', function() {
         // Arrange
-        const group1 = new Grouping("field1", "Field 1");
-        const group2 = new Grouping("field2", "Field 2");
-        const group3 = new Grouping("field3", "Field 3");
+        const group1 = new OrderGroupItem("field1", "Field 1");
+        const group2 = new OrderGroupItem("field2", "Field 2");
+        const group3 = new OrderGroupItem("field3", "Field 3");
 
         groupings.add(group1);
         groupings.add(group2);
@@ -53,9 +53,9 @@ describe('Groupings Tests', function() {
 
     it('remove', function() {
         // Arrange
-        const group1 = new Grouping("field1", "Field 1");
-        const group2 = new Grouping("field2", "Field 2");
-        const group3 = new Grouping("field3", "Field 3");
+        const group1 = new OrderGroupItem("field1", "Field 1");
+        const group2 = new OrderGroupItem("field2", "Field 2");
+        const group3 = new OrderGroupItem("field3", "Field 3");
 
         groupings.add(group1);
         groupings.add(group2);
@@ -76,11 +76,11 @@ describe('Groupings Tests', function() {
 
     it('move', function() {
         // Arrange
-        const group1 = new Grouping("field1", "Field 1");
-        const group2 = new Grouping("field2", "Field 2");
-        const group3 = new Grouping("field3", "Field 3");
-        const group4 = new Grouping("field4", "Field 4");
-        const group5 = new Grouping("field5", "Field 5");
+        const group1 = new OrderGroupItem("field1", "Field 1");
+        const group2 = new OrderGroupItem("field2", "Field 2");
+        const group3 = new OrderGroupItem("field3", "Field 3");
+        const group4 = new OrderGroupItem("field4", "Field 4");
+        const group5 = new OrderGroupItem("field5", "Field 5");
 
         groupings.add(group1);
         groupings.add(group2);

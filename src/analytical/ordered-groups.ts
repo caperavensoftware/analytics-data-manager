@@ -1,23 +1,23 @@
-export class Grouping implements  IGrouping {
+export class OrderGroupItem implements  IOrderGroupItem {
     field: string;
     display: string;
-    parent: IGrouping;
+    parent: IOrderGroupItem;
 
-    constructor(field: string, display: string, parent?: IGrouping) {
+    constructor(field: string, display: string, parent?: IOrderGroupItem) {
         this.field = field;
         this.display = display;
         this.parent = parent;
     }
 }
 
-export class Groupings implements IGroupings {
-    groupings: Array<IGrouping>;
+export class OrderGroup implements IOrderedGroup {
+    groupings: Array<IOrderGroupItem>;
 
     constructor() {
-        this.groupings = Array<IGrouping>();
+        this.groupings = Array<IOrderGroupItem>();
     }
 
-    add(item: IGrouping) {
+    add(item: IOrderGroupItem) {
         item.parent = null;
 
         this.groupings.push(item);
@@ -28,7 +28,7 @@ export class Groupings implements IGroupings {
         }
     }
 
-    insert(item: IGrouping, index: number) {
+    insert(item: IOrderGroupItem, index: number) {
         if (index > this.groupings.length) {
             throw new Error(`index ${index} is not in the range of the groupings`);
         }
@@ -38,7 +38,7 @@ export class Groupings implements IGroupings {
         this.groupings[index + 1].parent = this.groupings[index];
     }
 
-    remove(item: IGrouping) {
+    remove(item: IOrderGroupItem) {
         const index = this.groupings.indexOf(item);
         this.removeAt(index);
     }
