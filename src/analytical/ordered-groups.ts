@@ -14,7 +14,7 @@ export class OrderGroup implements IOrderedGroup {
     groupings: Array<IOrderGroupItem>;
 
     constructor() {
-        this.groupings = Array<IOrderGroupItem>();
+        this.groupings = new Array<IOrderGroupItem>();
     }
 
     add(item: IOrderGroupItem) {
@@ -87,5 +87,13 @@ export class OrderGroup implements IOrderedGroup {
         }
 
         this.groupings[toIndex + 1].parent = this.groupings[toIndex];
+    }
+
+    clear() {
+        for(let item of this.groupings) {
+            item.parent = null;
+        }
+
+        this.groupings = new Array<IOrderGroupItem>();
     }
 }

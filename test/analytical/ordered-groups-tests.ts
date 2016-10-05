@@ -105,4 +105,27 @@ describe('OrderGroup Tests', function() {
         expect(group4.parent).to.equal(group3, 'group4 parent should be group3');
         expect(group5.parent).to.equal(group2, 'group5 parent should be group4');
     });
+
+    it('clear', function() {
+        // Arrange
+        const group1 = new OrderGroupItem("field1", "Field 1");
+        const group2 = new OrderGroupItem("field2", "Field 2");
+        
+        // Act
+        groupings.add(group1);
+        groupings.add(group2);
+
+        // Assert
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.equal(group1, 'group2 parent should be group1');
+
+        // Act
+        groupings.clear();
+
+        // Assert
+        assert(groupings.groupings);
+        expect(groupings.groupings.length).to.equal(0);
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.be.null;
+    });
 });

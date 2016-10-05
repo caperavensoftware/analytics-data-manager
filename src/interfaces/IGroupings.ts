@@ -16,4 +16,5 @@ interface IOrderedGroup {
     remove(item: IOrderGroupItem);
     removeAt(index: number);
     move(fromIndex: number, toIndex: number);
+    clear();
 }
