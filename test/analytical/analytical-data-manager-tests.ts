@@ -1,4 +1,5 @@
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
+import * as sinon from 'sinon';
 import 'aurelia-polyfills';
 import {AnalyticalDataManager} from './../../src/analytical/analytical-data-manager';
 
@@ -14,4 +15,21 @@ describe('AnalyticalDataManager Tests', function() {
         expect(analyticalDataManager.groupingOrder).to.not.be.null;
         expect(analyticalDataManager.sortingOrder).to.not.be.null;
     });
+
+    it('setData', function() {
+        // Arrange
+        const groupingOrderSpy = sinon.spy(analyticalDataManager.groupingOrder, "validateFromModel");
+        const sortingOrderSpy = sinon.spy(analyticalDataManager.sortingOrder, "validateFromModel");
+        
+        const model = {
+            field1: "abc"
+        }
+
+        // Act
+        analyticalDataManager.setData([model]);
+
+        // Assert
+        assert(groupingOrderSpy.withArgs(model).calledOnce, 'groupingOrder validateFromModel should have been called once');
+        assert(sortingOrderSpy.withArgs(model).calledOnce, 'sortingOrder validateFromModel should have been called once');
+    })
 });
