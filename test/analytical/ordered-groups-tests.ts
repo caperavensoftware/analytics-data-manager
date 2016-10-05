@@ -128,4 +128,34 @@ describe('OrderGroup Tests', function() {
         expect(group1.parent).to.be.null;
         expect(group2.parent).to.be.null;
     });
+
+    it('validateFromModel', function() {
+        // Arrange
+        const group1 = new OrderGroupItem("field1", "Field 1");
+        const group2 = new OrderGroupItem("field2", "Field 2");
+        const group3 = new OrderGroupItem("field3", "Field 3");
+        
+        // Act
+        groupings.add(group1);
+        groupings.add(group2);
+        groupings.add(group3);
+
+        // Assert
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.equal(group1, 'group2 parent should be group1');
+        expect(group3.parent).to.equal(group2, 'group3 parent should be group2');
+
+        // Act
+        groupings.validateFromModel({
+            field1: "ABC",
+            field3: "DEF"
+        });
+
+        // Assert
+        assert(groupings.groupings);
+        expect(groupings.groupings.length).to.equal(2);
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.be.null;
+        expect(group3.parent).to.be.equal(group1);
+    })
 });

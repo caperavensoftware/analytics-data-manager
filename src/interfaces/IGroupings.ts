@@ -17,4 +17,5 @@ interface IOrderedGroup {
     removeAt(index: number);
     move(fromIndex: number, toIndex: number);
     clear();
+    validateFromModel(model: any);
 }

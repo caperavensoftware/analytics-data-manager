@@ -96,4 +96,18 @@ export class OrderGroup implements IOrderedGroup {
 
         this.groupings = new Array<IOrderGroupItem>();
     }
+
+    validateFromModel(model: any) {
+        if (this.groupings.length === 0) {
+            return;
+        }
+
+        const properties = Object.keys(model);
+
+        for(let item of this.groupings) {
+            if (properties.indexOf(item.field) === -1) {
+                this.remove(item);
+            }
+        }
+    }
 }
