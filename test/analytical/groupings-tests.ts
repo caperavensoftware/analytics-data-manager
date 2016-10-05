@@ -74,5 +74,35 @@ describe('Groupings Tests', function() {
         expect(group3.parent).to.equal(group1, "group3 parent should be group1");
     });
 
-    it('move');
+    it('move', function() {
+        // Arrange
+        const group1 = new Grouping("field1", "Field 1");
+        const group2 = new Grouping("field2", "Field 2");
+        const group3 = new Grouping("field3", "Field 3");
+        const group4 = new Grouping("field4", "Field 4");
+        const group5 = new Grouping("field5", "Field 5");
+
+        groupings.add(group1);
+        groupings.add(group2);
+        groupings.add(group3);
+        groupings.add(group4);
+        groupings.add(group5);
+
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.equal(group1, 'group2 parent should be group1');
+        expect(group3.parent).to.equal(group2, 'group3 parent should be group2');
+        expect(group4.parent).to.equal(group3, 'group4 parent should be group3');
+        expect(group5.parent).to.equal(group4, 'group5 parent should be group4');
+
+        // Act
+        groupings.move(1, 3);
+
+        // Assert
+        expect(groupings.groupings.length).to.equal(5, 'grouping should be 5 items after move');
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.equal(group4, 'group2 parent should be group3');
+        expect(group3.parent).to.equal(group1, 'group3 parent should be group2');
+        expect(group4.parent).to.equal(group3, 'group4 parent should be group3');
+        expect(group5.parent).to.equal(group2, 'group5 parent should be group4');
+    });
 });
