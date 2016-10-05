@@ -18,18 +18,40 @@ export class Groupings implements IGroupings {
     }
 
     add(item: IGrouping) {
+        item.parent = null;
+
         this.groupings.push(item);
+
+        const index = this.groupings.length - 1;
+        if (index > 0) {
+            this.groupings[index].parent = this.groupings[index - 1];
+        }
     }
 
-    insert(item: IGrouping, index: Number) {
+    insert(item: IGrouping, index: number) {
+        if (index > this.groupings.length) {
+            throw new Error(`index ${index} is not in the range of the groupings`);
+        }
+
+        this.groupings.splice(index, 0, item);
+        this.groupings[index].parent = this.groupings[index - 1];
+        this.groupings[index + 1].parent = this.groupings[index];
     }
 
     remove(item: IGrouping) {
+        const index = this.groupings.indexOf(item);
+        this.removeAt(index);
     }
 
-    removeAt(index: Number) {
+    removeAt(index: number) {
+        this.groupings[index].parent = null;
+        this.groupings.splice(index, 1);
+
+        if (this.groupings.length > 0 && index > 0) {
+            this.groupings[index].parent = this.groupings[index - 1];
+        }
     }
 
-    move(fromIndex: Number, toIndex: Number) {
+    move(fromIndex: number, toIndex: number) {
     }
 }

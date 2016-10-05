@@ -1,4 +1,5 @@
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
+import * as sinon from 'sinon';
 import 'aurelia-polyfills';
 import {Groupings, Grouping} from './../../src/analytical/groupings';
 
@@ -25,8 +26,53 @@ describe('Groupings Tests', function() {
         expect(groupings.groupings.length).to.equal(1, "groupings should have one item");
     });
 
-    it('insert');
-    it('remove');
-    it('removeAt');
+    it('insert', function() {
+        // Arrange
+        const group1 = new Grouping("field1", "Field 1");
+        const group2 = new Grouping("field2", "Field 2");
+        const group3 = new Grouping("field3", "Field 3");
+
+        groupings.add(group1);
+        groupings.add(group2);
+
+        expect(group2.parent).to.equal(group1, 'group2 parent should be group1');
+
+        // Act
+        groupings.insert(group3, 1);
+
+        // Assert
+        expect(groupings.groupings.length).to.equal(3);
+        expect(groupings.groupings[0].field).to.equal("field1");
+        expect(groupings.groupings[1].field).to.equal("field3");
+        expect(groupings.groupings[2].field).to.equal("field2");
+
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.equal(group3, 'group2 parent should be group3');
+        expect(group3.parent).to.equal(group1, 'group3 parent should be group1');
+    });
+
+    it('remove', function() {
+        // Arrange
+        const group1 = new Grouping("field1", "Field 1");
+        const group2 = new Grouping("field2", "Field 2");
+        const group3 = new Grouping("field3", "Field 3");
+
+        groupings.add(group1);
+        groupings.add(group2);
+        groupings.add(group3);
+
+        expect(group1.parent).to.be.null;
+        expect(group2.parent).to.equal(group1, 'group2 parent should be group1');
+        expect(group3.parent).to.equal(group2, 'group3 parent should be group2');
+
+        // Act
+        groupings.remove(group2);
+
+        // Assert
+        expect(groupings.groupings.length).to.be.equal(2, "groupings should have 2 items");
+        expect(group2.parent).to.be.null;
+        expect(group3.parent).to.equal(group1, "group3 parent should be group1");
+    });
+
     it('move');
 });
