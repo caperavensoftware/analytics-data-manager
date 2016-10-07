@@ -3,5 +3,4 @@ node_modules
 jspm_packages
 app
 styles
-typings
 coverage
