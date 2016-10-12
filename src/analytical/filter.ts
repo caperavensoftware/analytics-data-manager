@@ -49,8 +49,4 @@ export class Filter {
 
         return true;
     }
-
-    initFromGroupingOrder(groupingOrder: GroupingOrder) {
-        
-    }
 }
