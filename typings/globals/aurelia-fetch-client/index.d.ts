@@ -73,7 +73,7 @@ declare module 'aurelia-fetch-client' {
     /**
       * Any body that you want to add to your request: this can be a Blob, BufferSource, FormData, URLSearchParams, or USVString object. Note that a request using the GET or HEAD method cannot have a body.
       */
-    body?: Blob | BufferSource | FormData | URLSearchParams | string;
+    body?: Blob | FormData | URLSearchParams | string;
     
     /**
       * The mode you want to use for the request, e.g., cors, no-cors, same-origin, or navigate. The default is cors. In Chrome the default is no-cors before Chrome 47 and same-origin starting with Chrome 47.
@@ -269,6 +269,7 @@ declare module 'aurelia-fetch-client' {
 // @cmichaelgraham - removed explicit external reference
 
 // @cmichaelgraham - added BufferSource and URLSearchParams interfaces to help compilation
+
 interface URLSearchParams {}
 
 declare class Request {

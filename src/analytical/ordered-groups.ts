@@ -1,3 +1,5 @@
+import {Filter, EqualsFilterItem} from "./filter";
+
 export class OrderGroupItem implements  IOrderGroupItem {
     field: string;
     display: string;
@@ -12,6 +14,14 @@ export class OrderGroupItem implements  IOrderGroupItem {
 
 export class OrderGroup implements IOrderedGroup {
     groupings: Array<IOrderGroupItem>;
+
+    get hasItems() {
+        return this.groupings.length > 0;
+    }
+
+    get firstItem(): IOrderGroupItem {
+        return this.groupings[0];
+    }
 
     constructor() {
         this.groupings = new Array<IOrderGroupItem>();
