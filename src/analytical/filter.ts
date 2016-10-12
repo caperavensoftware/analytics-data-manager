@@ -26,6 +26,10 @@ export class EqualsFilterItem extends FilterItem {
 export class Filter {
     filterItems: Array<FilterItem>;
 
+    constructor() {
+        this.filterItems = [];
+    }
+
     add(filterItem: FilterItem) {
         this.filterItems.push(filterItem);
     }
