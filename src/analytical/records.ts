@@ -9,7 +9,7 @@ export class RecordBase {
 }
 
 export class GroupingRecord extends RecordBase {
-    public display: string;
+    public value: string;
 
     // children can be grouping or data records
     public children: Array<any>;

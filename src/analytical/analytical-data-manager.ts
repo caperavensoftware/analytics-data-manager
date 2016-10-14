@@ -89,7 +89,7 @@ export class AnalyticalDataManager {
             }
 
             if (groupingRecord) {
-                groupingRecord.display = value;
+                groupingRecord.value = value;
                 set.add(value);
                 result.push(groupingRecord);
             }
